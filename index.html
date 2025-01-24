@@ -13,6 +13,8 @@
     
     <script type="text/babel">
         const App = () => {
+            const [showPopup, setShowPopup] = React.useState(false);
+
             const products = [
                 {
                     title: "Artisanal Air in Mason Jar",
@@ -50,8 +52,8 @@
             ];
 
             return (
-                <div className="max-w-4xl mx-auto p-4 bg-white">
-                    <h1 className="text-2xl font-bold text-orange-500 mb-2">Artisanal Greatness</h1>
+                <div className="max-w-4xl mx-auto p-4 bg-white relative">
+                    <h1 className="text-2xl font-bold text-orange-500 mb-2">ArtisanalNonsense</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {products.map((product, index) => (
                             <div key={index} className="border rounded-lg p-4">
@@ -75,12 +77,28 @@
                                     {"⭐".repeat(Math.floor(product.rating))}
                                     <span className="text-gray-500 ml-2">({product.reviews} reviews)</span>
                                 </div>
-                                <button className="mt-4 w-full bg-black text-white py-2 rounded-full">
+                                <button 
+                                    onClick={() => setShowPopup(true)}
+                                    className="mt-4 w-full bg-black text-white py-2 rounded-full">
                                     Add to cart
                                 </button>
                             </div>
                         ))}
                     </div>
+
+                    {showPopup && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                            <div className="bg-white p-6 rounded-lg max-w-md">
+                                <h3 className="text-lg font-bold mb-4">User Verification Required</h3>
+                                <p className="mb-4">Please pronounce "Jaime Martinez" for user verification</p>
+                                <button 
+                                    onClick={() => setShowPopup(false)}
+                                    className="bg-black text-white px-4 py-2 rounded-full">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         };
