@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke Etsy Shop</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { Star, Heart, ShoppingCart } = lucide;
+        
+        const EtsyShop = () => {
+            const products = [
+                {
+                    title: "Artisanal Air in Mason Jar",
+                    price: "49.99",
+                    description: "Hand-captured air from my living room. Each jar unique.",
+                    reviews: 420,
+                    rating: 4.9,
+                    image: "https://images.unsplash.com/photo-1592765887019-4e9ac19757b0?w=400"
+                },
+                {
+                    title: "Pre-worn Left Socks",
+                    price: "29.99",
+                    description: "Authentic single left socks. Right socks sold separately.",
+                    reviews: 69,
+                    rating: 4.7,
+                    image: "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=400"
+                },
+                {
+                    title: "Invisible Paint",
+                    price: "159.99",
+                    description: "You can't see it because it works so well!",
+                    reviews: 183,
+                    rating: 5.0,
+                    image: "https://images.unsplash.com/photo-1626585808661-aca38b89b651?w=400"
+                }
+            ];
+
+            return (
+                <div className="max-w-4xl mx-auto p-4 bg-white">
+                    <header className="mb-8">
+                        <h1 className="text-2xl font-bold text-orange-500 mb-2">ArtisanalNonsense</h1>
+                        <p className="text-gray-600">Selling authentic artisanal items since 5 minutes ago</p>
+                    </header>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {products.map((product, index) => (
+                            <div key={index} className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
+                                <div className="bg-gray-100 h-48 mb-4 rounded flex items-center justify-center">
+                                    <img 
+                                        src={product.image} 
+                                        alt={product.title}
+                                        className="h-40 w-40 object-cover rounded"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = `https://via.placeholder.com/400?text=${encodeURIComponent(product.title)}`;
+                                        }}
+                                    />
+                                </div>
+                                <h2 className="text-lg font-semibold mb-2">{product.title}</h2>
+                                <p className="text-gray-600 text-sm mb-2">{product.description}</p>
+                                <div className="flex items-center mb-2">
+                                    <span className="text-xl font-bold">${product.price}</span>
+                                    <span className="ml-2 text-gray-500 text-sm">+ FREE shipping</span>
+                                </div>
+                                <div className="flex items-center mb-4">
+                                    <Star className="w-4 h-4 fill-current text-yellow-400" />
+                                    <span className="ml-1 text-sm">{product.rating}</span>
+                                    <span className="ml-2 text-sm text-gray-500">({product.reviews})</span>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button className="bg-black text-white px-4 py-2 rounded-full flex-grow flex items-center justify-center gap-2">
+                                        <ShoppingCart className="w-4 h-4" />
+                                        Add to cart
+                                    </button>
+                                    <button className="border border-gray-300 p-2 rounded-full">
+                                        <Heart className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<EtsyShop />, document.getElementById('root'));
+    </script>
+</body>
+</html>
